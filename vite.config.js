@@ -4,7 +4,13 @@ import path from 'path'
 
 export default defineConfig({
     plugins: [
-        vue(),
+        vue({
+            emplate: {
+                compilerOptions: {
+                    isCustomElement: tag => tag.startsWith('sl-')
+                }
+            }
+        }),
     ],
     resolve: {
         alias: {
