@@ -1,26 +1,46 @@
-import eventBus from '@/services/event-bus.js'
+import supabase from '@/services/supabase.js'
 import { ref, readonly, computed } from 'vue'
-import {
-    user as getUser,
-    signIn,
-    signOut
-} from '@/services/auth.js'
 
-const authenticated = ref(!!getUser())
+const currentUser = ref(supabase.auth.user())
+const authenticated = computed(() => !!currentUser.value)
 
-eventBus.on('auth:sign-out', () => {
-    authenticated.value = false
+supabase.auth.onAuthStateChange(() => {
+    currentUser.value = supabase.auth.user()
 })
 
-eventBus.on('auth:sign-in', () => {
-    authenticated.value = true
-})
+export const user = readonly(currentUser)
+export const isAuthenticated = readonly(authenticated)
 
-const isAuthenticated = readonly(authenticated)
+export const signIn = async (email, password) => {
+    const { user, session, error } = await supabase.auth.signIn({
+        email,
+        password,
+    })
 
-export {
-    getUser,
-    isAuthenticated,
-    signIn,
-    signOut,
+    if (error) {
+        throw error
+    }
+
+    return { user, session }
+}
+
+export const signOut = async () => {
+    const { error } = await supabase.auth.signOut()
+
+    if (error) {
+        throw error
+    }
+}
+
+export const signUp = async (username, email, password) => {
+    const { user, session, error } = await supabase.auth.signUp({
+        email,
+        password,
+    }, { username })
+
+    if (error) {
+        throw error
+    }
+
+    return { user, session }
 }

@@ -57,7 +57,7 @@ import '@shoelace-style/shoelace/dist/components/button/button.js'
 import { ref } from 'vue'
 import AppAlert from '@/components/AppAlert.vue'
 import AppPageHeader from '@/components/AppPageHeader.vue'
-import { signUp } from '@/services/auth.js'
+import { signUp } from '@/composables/useAuth.js'
 
 const success = ref(false)
 

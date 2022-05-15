@@ -43,11 +43,10 @@ import AppAlert from '@/components/AppAlert.vue'
 import AppPageHeader from '@/components/AppPageHeader.vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { signIn } from '@/services/auth.js'
-
-const router = useRouter()
+import { signIn } from '@/composables/useAuth.js'
 
 const failureMessage = ref('')
+const router = useRouter()
 
 const submit = async ({ target: form }) => {
     const data = new FormData(form)
@@ -57,7 +56,7 @@ const submit = async ({ target: form }) => {
     } catch (e) {
         failureMessage.value = e.message || 'Unknown error'
 
-        return
+        throw e
     }
 
     router.push({ name: 'Chat' })

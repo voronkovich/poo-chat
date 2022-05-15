@@ -9,16 +9,15 @@
         </div>
         <div v-else>
             <p class="text-center">
-                You are signed in as <strong class="text-bold-800">{{ getUser().email }}</strong>.
+                You are signed in as <strong class="text-bold-800">{{ user.email }}</strong>.
 
                 <button type="button" @click="signOut" class="link">Sign Out</button>
             </p>
         </div>
     </div>
-
 </template>
 
 <script setup>
 import AppPageHeader from '@/components/AppPageHeader.vue'
-import { getUser, isAuthenticated, signOut } from '@/composables/useAuth.js'
+import { user, isAuthenticated, signOut } from '@/composables/useAuth.js'
 </script>
