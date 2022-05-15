@@ -1,9 +1,15 @@
-import Welcome from '@/views/Welcome.vue'
+import SignIn from '@/views/SignIn.vue'
+import SignUp from '@/views/SignUp.vue'
 
 export default [
     {
         path: '/',
-        name: 'Welcome',
-        component: Welcome,
+        name: 'SignIn',
+        component: SignIn,
+    },
+    {
+        path: '/sign-up',
+        name: 'SignUp',
+        component: SignUp,
     },
 ]
