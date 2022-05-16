@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { watch } from 'vue'
+import { isAuthenticated } from '@/composables/useAuth.js'
 import supabase from '@/services/supabase'
 import Chat from '@/views/Chat.vue'
 import SignIn from '@/views/SignIn.vue'
@@ -37,6 +39,18 @@ router.beforeEach((to, from, next) => {
     }
 
     next({ name: 'SignIn' })
+})
+
+const signOutWatcher = watch(isAuthenticated, isAuthenticated => {
+    if (!isAuthenticated) {
+        if (router.currentRoute.value.path === '/') {
+            router.go()
+
+            return
+        }
+
+        router.push({ path: '/' })
+    }
 })
 
 export default router
