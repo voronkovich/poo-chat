@@ -2,7 +2,7 @@
     <PageHeader>Sign In</PageHeader>
 
     <div class="max-w-sm mx-auto my-4">
-        <Alert variant="danger" title="Failure!" v-show="errorMessage" open closable>
+        <Alert variant="danger" title="Failure!" v-if="errorMessage" open closable>
             {{ errorMessage }}
         </Alert>
     </div>
