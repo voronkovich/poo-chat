@@ -11,36 +11,85 @@ supabase.auth.onAuthStateChange(() => {
 export const user = readonly(currentUser)
 export const isAuthenticated = readonly(authenticated)
 
-export const signIn = async (email, password) => {
-    const { user, session, error } = await supabase.auth.signIn({
-        email,
-        password,
-    })
+export const useSignIn = () => {
+    const errorStatus = ref(null)
+    const errorMessage = ref(null)
 
-    if (error) {
-        throw error
+    const signIn = async (email, password) => {
+        errorStatus.value = null
+        errorMessage.value = null
+
+        const { user, session, error } = await supabase.auth.signIn({
+            email,
+            password,
+        })
+
+        if (error) {
+            errorStatus.value = error.status
+            errorMessage.value = getErrorMessage(error)
+        }
+
+        return { user, session }
     }
 
-    return { user, session }
+    return {
+        errorStatus,
+        errorMessage,
+        signIn,
+    }
 }
 
-export const signOut = async () => {
-    const { error } = await supabase.auth.signOut()
+export const useSignOut = () => {
+    const errorStatus = ref(null)
+    const errorMessage = ref(null)
 
-    if (error) {
-        throw error
+    const signOut = async () => {
+        errorStatus.value = null
+        errorMessage.value = null
+
+        const { error } = await supabase.auth.signOut()
+
+        if (error) {
+            errorStatus.value = error.status
+            errorMessage.value = getErrorMessage(error)
+        }
+    }
+
+    return {
+        errorStatus,
+        errorMessage,
+        signOut,
     }
 }
 
-export const signUp = async (username, email, password) => {
-    const { user, session, error } = await supabase.auth.signUp({
-        email,
-        password,
-    }, { username })
+export const useSignUp = (username, email, password) => {
+    const errorStatus = ref(null)
+    const errorMessage = ref(null)
 
-    if (error) {
-        throw error
+    const signUp = async (username, email, password) => {
+        errorStatus.value = null
+        errorMessage.value = null
+
+        const { user, session, error } = await supabase.auth.signUp({
+            email,
+            password,
+        }, { username })
+
+        if (error) {
+            errorStatus.value = error.status
+            errorMessage.value = getErrorMessage(error)
+        }
+
+        return { user, session }
     }
 
-    return { user, session }
+    return {
+        errorStatus,
+        errorMessage,
+        signUp,
+    }
+}
+
+const getErrorMessage = (error) => {
+    return error.message || 'Unknown error'
 }

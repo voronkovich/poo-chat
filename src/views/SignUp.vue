@@ -6,8 +6,8 @@
             You have been signed up successfully.
         </AppAlert>
 
-        <AppAlert variant="danger" title="Failure!" v-show="failureMessage" open closable>
-            {{ failureMessage }}
+        <AppAlert variant="danger" title="Failure!" v-show="errorMessage" open closable>
+            {{ errorMessage }}
         </AppAlert>
     </div>
 
@@ -57,31 +57,27 @@ import '@shoelace-style/shoelace/dist/components/button/button.js'
 import { ref } from 'vue'
 import AppAlert from '@/components/AppAlert.vue'
 import AppPageHeader from '@/components/AppPageHeader.vue'
-import { signUp } from '@/composables/useAuth.js'
+import { useSignUp } from '@/composables/useAuth.js'
 
 const success = ref(false)
 
-const failureMessage = ref('')
+const { errorMessage, signUp } = useSignUp()
 
 const submit = async ({ target: form }) => {
     success.value = false
-    failureMessage.value = ''
 
     const data = new FormData(form)
 
-    try {
-        await signUp(
-            data.get('username'),
-            data.get('email'),
-            data.get('password'),
-        )
-    } catch (e) {
-        failureMessage.value = e.message || 'Unknown error'
+    const { user, session } = await signUp(
+        data.get('username'),
+        data.get('email'),
+        data.get('password'),
+    )
 
-        return
+    if (user) {
+        success.value = true
+
+        form.reset()
     }
-
-    success.value = true
-    form.reset()
 }
 </script>

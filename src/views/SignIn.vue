@@ -2,8 +2,8 @@
     <AppPageHeader>Sign In</AppPageHeader>
 
     <div class="max-w-sm mx-auto my-4">
-        <AppAlert variant="danger" title="Failure!" v-show="failureMessage" open closable>
-            {{ failureMessage }}
+        <AppAlert variant="danger" title="Failure!" v-show="errorMessage" open closable>
+            {{ errorMessage }}
         </AppAlert>
     </div>
 
@@ -43,22 +43,19 @@ import AppAlert from '@/components/AppAlert.vue'
 import AppPageHeader from '@/components/AppPageHeader.vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { signIn } from '@/composables/useAuth.js'
+import { useSignIn } from '@/composables/useAuth.js'
 
-const failureMessage = ref('')
 const router = useRouter()
+
+const { errorMessage, signIn } = useSignIn()
 
 const submit = async ({ target: form }) => {
     const data = new FormData(form)
 
-    try {
-        await signIn(data.get('email'), data.get('password'))
-    } catch (e) {
-        failureMessage.value = e.message || 'Unknown error'
+    const { user, session } = await signIn(data.get('email'), data.get('password'))
 
-        throw e
+    if (user) {
+        router.push({ name: 'Chat' })
     }
-
-    router.push({ name: 'Chat' })
 }
 </script>

@@ -19,5 +19,7 @@
 
 <script setup>
 import AppPageHeader from '@/components/AppPageHeader.vue'
-import { user, isAuthenticated, signOut } from '@/composables/useAuth.js'
+import { user, isAuthenticated, useSignOut } from '@/composables/useAuth.js'
+
+const { signOut } = useSignOut()
 </script>
