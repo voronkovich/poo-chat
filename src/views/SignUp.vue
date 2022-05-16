@@ -1,14 +1,14 @@
 <template>
-    <AppPageHeader>Sign Up</AppPageHeader>
+    <PageHeader>Sign Up</PageHeader>
 
     <div class="max-w-sm mx-auto my-4">
-        <AppAlert variant="success" title="Success!" v-show="success" open closable>
+        <Alert variant="success" title="Success!" v-show="success" open closable>
             You have been signed up successfully.
-        </AppAlert>
+        </Alert>
 
-        <AppAlert variant="danger" title="Failure!" v-show="errorMessage" open closable>
+        <Alert variant="danger" title="Failure!" v-show="errorMessage" open closable>
             {{ errorMessage }}
-        </AppAlert>
+        </Alert>
     </div>
 
     <form @submit.prevent="submit" class="max-w-sm mx-auto" v-show="!success">
@@ -55,8 +55,8 @@
 import '@shoelace-style/shoelace/dist/components/input/input.js'
 import '@shoelace-style/shoelace/dist/components/button/button.js'
 import { ref } from 'vue'
-import AppAlert from '@/components/AppAlert.vue'
-import AppPageHeader from '@/components/AppPageHeader.vue'
+import Alert from '@/components/Alert.vue'
+import PageHeader from '@/components/PageHeader.vue'
 import { useSignUp } from '@/composables/useAuth.js'
 
 const success = ref(false)

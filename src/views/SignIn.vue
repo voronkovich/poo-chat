@@ -1,10 +1,10 @@
 <template>
-    <AppPageHeader>Sign In</AppPageHeader>
+    <PageHeader>Sign In</PageHeader>
 
     <div class="max-w-sm mx-auto my-4">
-        <AppAlert variant="danger" title="Failure!" v-show="errorMessage" open closable>
+        <Alert variant="danger" title="Failure!" v-show="errorMessage" open closable>
             {{ errorMessage }}
-        </AppAlert>
+        </Alert>
     </div>
 
     <form @submit.prevent="submit" class="max-w-sm mx-auto">
@@ -39,8 +39,8 @@
 <script setup>
 import '@shoelace-style/shoelace/dist/components/input/input.js'
 import '@shoelace-style/shoelace/dist/components/button/button.js'
-import AppAlert from '@/components/AppAlert.vue'
-import AppPageHeader from '@/components/AppPageHeader.vue'
+import Alert from '@/components/Alert.vue'
+import PageHeader from '@/components/PageHeader.vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useSignIn } from '@/composables/useAuth.js'

@@ -1,5 +1,5 @@
 <template>
-    <AppPageHeader>Welcome!</AppPageHeader>
+    <PageHeader>Welcome!</PageHeader>
 
     <div class="max-w-sm mx-auto">
         <div v-if="!isAuthenticated">
@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import AppPageHeader from '@/components/AppPageHeader.vue'
+import PageHeader from '@/components/PageHeader.vue'
 import { user, isAuthenticated, useSignOut } from '@/composables/useAuth.js'
 
 const { signOut } = useSignOut()
