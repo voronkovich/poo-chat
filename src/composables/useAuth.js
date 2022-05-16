@@ -73,7 +73,7 @@ export const useSignUp = (username, email, password) => {
         const { user, session, error } = await supabase.auth.signUp({
             email,
             password,
-        }, { username })
+        }, { data: { username } })
 
         if (error) {
             errorStatus.value = error.status
