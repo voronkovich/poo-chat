@@ -1,41 +1,33 @@
 <template>
-    <sl-alert>
-        <sl-icon slot="icon" :name="icon"></sl-icon>
-
-        <strong v-if="title" class="block">{{ title }}</strong>
-
+    <div class="px-4 py-3 rounded" :class="cssClass">
+        <strong v-if="title" class="block mb-2">{{ title }}</strong>
         <slot></slot>
-    </sl-alert>
+    </div>
 </template>
 
 <script setup>
-import '@shoelace-style/shoelace/dist/components/alert/alert.js'
-import '@shoelace-style/shoelace/dist/components/icon/icon.js'
-import { computed, useAttrs } from 'vue'
+import { computed } from 'vue'
 
-defineProps({
+const props = defineProps({
     title: {
         type: String,
         required: false,
+    },
+    variant: {
+        type: String,
+        required: false,
+        default: 'primary'
     }
 })
 
-const attrs = useAttrs()
-
-const icon = computed(() => {
-    switch (attrs.variant) {
+const cssClass = computed(() => {
+    switch (props.variant) {
         case 'primary':
-            return 'info-circle'
-        case 'neutral':
-            return 'gear'
+            return 'bg-blue-100 text-blue-800'
         case 'success':
-            return 'check2-circle'
-        case 'warning':
-            return 'exclamation-triangle'
+            return 'bg-green-100 text-green-800'
         case 'danger':
-            return 'exclamation-octagon'
+            return 'bg-red-100 text-red-800'
     }
-
-    return 'info-circle'
 })
 </script>
