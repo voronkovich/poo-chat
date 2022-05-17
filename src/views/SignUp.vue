@@ -2,10 +2,6 @@
     <PageHeader>Sign Up</PageHeader>
 
     <div class="max-w-sm mx-auto my-4">
-        <Alert variant="success" title="Success!" v-if="success">
-            You have been signed up successfully.
-        </Alert>
-
         <Alert variant="danger" title="Failure!" v-if="errorMessage">
             {{ errorMessage }}
         </Alert>
@@ -39,18 +35,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useSignUp } from '@/composables/useAuth.js'
 import Alert from '@/components/Alert.vue'
 import PageHeader from '@/components/PageHeader.vue'
-import { useSignUp } from '@/composables/useAuth.js'
-
-const success = ref(false)
 
 const { errorMessage, signUp } = useSignUp()
 
-const submit = async ({ target: form }) => {
-    success.value = false
+const router = useRouter()
 
+const submit = async ({ target: form }) => {
     const { user, session } = await signUp(
         form.username.value,
         form.email.value,
@@ -58,9 +52,7 @@ const submit = async ({ target: form }) => {
     )
 
     if (user) {
-        success.value = true
-
-        form.reset()
+        router.push({ name: 'Chat' })
     }
 }
 </script>
