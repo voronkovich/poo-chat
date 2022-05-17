@@ -8,25 +8,18 @@
     </div>
 
     <form @submit.prevent="submit" class="max-w-sm mx-auto">
-        <sl-input
-            name="email"
-            label="Email"
-            type="email"
-            required
-            class="my-4"
-        ></sl-input>
+        <label class="form-row">
+            <span class="form-label">Email</span>
+            <input name="email" class="form-control" type="email" required />
+        </label>
 
-        <sl-input
-            name="password"
-            label="Password"
-            type="password"
-            class="my-4"
-            required
-            toggle-password
-        ></sl-input>
+        <label class="form-row">
+            <span class="form-label">Password</span>
+            <input name="password" class="form-control" type="password" required />
+        </label>
 
         <div class="my-6 text-center">
-            <sl-button variant="primary" type="submit" pill>Sign In</sl-button>
+            <button class="btn">Sign In</button>
         </div>
 
         <p class="my-4 text-gray-500 text-center">
@@ -37,8 +30,6 @@
 </template>
 
 <script setup>
-import '@shoelace-style/shoelace/dist/components/input/input.js'
-import '@shoelace-style/shoelace/dist/components/button/button.js'
 import Alert from '@/components/Alert.vue'
 import PageHeader from '@/components/PageHeader.vue'
 import { ref } from 'vue'
@@ -50,9 +41,7 @@ const router = useRouter()
 const { errorMessage, signIn } = useSignIn()
 
 const submit = async ({ target: form }) => {
-    const data = new FormData(form)
-
-    const { user, session } = await signIn(data.get('email'), data.get('password'))
+    const { user, session } = await signIn(form.email.value, form.password.value)
 
     if (user) {
         router.push({ name: 'Chat' })
