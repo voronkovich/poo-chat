@@ -7,20 +7,44 @@
         </Alert>
     </div>
 
-    <form @submit.prevent="submit" class="max-w-sm mx-auto" v-show="!success">
+    <form @submit.prevent="submit" class="max-w-sm mx-auto">
         <label class="form-row">
             <span class="form-label">Username</span>
-            <input name="username" class="form-control" type="text" minlength="3" pattern="^\w+$" required />
+            <input
+                name="username"
+                class="form-control"
+                type="text"
+                minlength="3"
+                maxlength="10"
+                pattern="^\w+$"
+                placeholder="Username"
+                required
+            />
+            <span class="block pl-2 text-sm text-gray-500">E.g. "bob", "alice" and etc.</span>
         </label>
 
         <label class="form-row">
             <span class="form-label">Email</span>
-            <input name="email" class="form-control" type="email" required />
+            <input
+                name="email"
+                class="form-control"
+                type="email"
+                placeholder="Email"
+                required
+            />
         </label>
 
         <label class="form-row">
             <span class="form-label">Password</span>
-            <input name="password" class="form-control" type="password" minlength="6" />
+            <input
+                name="password"
+                class="form-control"
+                type="password"
+                minlength="6"
+                autocomplete="new-password"
+                placeholder="Password"
+                required
+            />
         </label>
 
         <div class="text-center my-6">
