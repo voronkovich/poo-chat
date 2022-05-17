@@ -39,8 +39,6 @@
 </template>
 
 <script setup>
-import '@shoelace-style/shoelace/dist/components/input/input.js'
-import '@shoelace-style/shoelace/dist/components/button/button.js'
 import { ref } from 'vue'
 import Alert from '@/components/Alert.vue'
 import PageHeader from '@/components/PageHeader.vue'
