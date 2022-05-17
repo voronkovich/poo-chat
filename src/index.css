@@ -10,4 +10,8 @@
     .page-header {
         @apply text-2xl text-center py-4;
     }
+
+    .form-control {
+        @apply py-1 px-2 border rounded border-gray-300 focus:border-sky-200 focus:outline focus:outline-sky-100;
+    }
 }
