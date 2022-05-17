@@ -1,15 +1,18 @@
 import supabase from '@/services/supabase.js'
 import { ref, readonly, computed } from 'vue'
 
-const currentUser = ref(supabase.auth.user())
-const authenticated = computed(() => !!currentUser.value)
+const createUserRef = (supabase) => {
+    const user = ref(supabase.auth.user())
 
-supabase.auth.onAuthStateChange(() => {
-    currentUser.value = supabase.auth.user()
-})
+    supabase.auth.onAuthStateChange(() => {
+        user.value = supabase.auth.user()
+    })
 
-export const user = readonly(currentUser)
-export const isAuthenticated = readonly(authenticated)
+    return readonly(user)
+}
+
+export const user = createUserRef(supabase)
+export const isAuthenticated = computed(() => !!user.value)
 
 export const useSignIn = () => {
     const errorStatus = ref(null)
