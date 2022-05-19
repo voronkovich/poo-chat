@@ -1,5 +1,5 @@
 <template>
-    <form>
+    <form class="mt-4">
         <textarea
             class="block w-full h-20 form-control"
             placeholder="Enter message here..."
