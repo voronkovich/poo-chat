@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^1.35.3",
+    "randomcolor": "^0.6.2",
     "vue": "^3.2.25",
     "vue-router": "^4.0.15"
   },
