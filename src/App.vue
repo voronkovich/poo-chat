@@ -1,5 +1,5 @@
 <template>
-    <header class="max-w-screen-sm mx-auto p-4 mt-2 md:mt-16 text-3xl text-center">
+    <header class="max-w-screen-sm mx-auto p-4 mt-2 md:mt-10 text-3xl text-center">
         <router-link :to="{ name: 'Chat' }" title="Build in a weekend. Scale to millions">
             <Logo class="inline-block h-16 mr-1"></Logo> PooChat
         </router-link>

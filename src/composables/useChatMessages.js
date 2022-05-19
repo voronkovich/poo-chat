@@ -27,7 +27,7 @@ export default async (limit = 100) => {
                     throw error
                 }
 
-                addNewChatMessage(data[0])
+                addNewChatMessage(data)
             })
     })
 
@@ -47,6 +47,7 @@ const getChatMessageById = async (id) => {
         .from('chat')
         .select('*')
         .eq('id', id)
+        .single()
 }
 
 const subscribeToNewChatMessages = (callback) => {

@@ -1,7 +1,7 @@
 <template>
     <form class="mt-4">
         <textarea
-            class="block w-full h-20 form-control"
+            class="block w-full h-32 form-control"
             placeholder="Enter message here..."
             v-model="message"
             @keypress.enter="submit"
