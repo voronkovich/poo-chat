@@ -1,6 +1,6 @@
 <template>
-    <div class="h-[50vh] overflow-y-scroll" ref="container">
-        <div v-for="message of messages" :key="message.id" class="py-2">
+    <div class="h-[30vh] overflow-y-scroll flex flex-col-reverse bg-gray-50 rounded-xl px-3" ref="container">
+        <div v-for="message of messages.slice().reverse()" :key="message.id" class="py-2">
             <Username :username="message.username" />: {{ message.content }}
         </div>
     </div>
@@ -16,7 +16,7 @@ const { messages } = await useChatMessages(50)
 const container = ref()
 
 const scrollToLastChatMessage = () => {
-    container.value.lastElementChild.scrollIntoView()
+    container.value.firstElementChild.scrollIntoView()
 }
 
 onUpdated(scrollToLastChatMessage)
