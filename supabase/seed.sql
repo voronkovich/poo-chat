@@ -3,3 +3,5 @@ INSERT INTO auth.users VALUES ('00000000-0000-0000-0000-000000000000', '718b5ce3
 
 INSERT INTO public.messages VALUES (1, '2022-05-18 20:52:57.030924+00', '6c84653f-6696-4033-b2c0-8336cf404d14', 'Hi, Alice!');
 INSERT INTO public.messages VALUES (2, '2022-05-18 20:58:25.386343+00', '718b5ce3-8e16-432c-a222-526e2935faca', 'Hi, Bob!');
+INSERT INTO public.messages VALUES (3, '2022-05-18 20:59:32.135924+00', '6c84653f-6696-4033-b2c0-8336cf404d14', 'Did you hear about Supabase?');
+INSERT INTO public.messages VALUES (4, '2022-05-18 21:01:14.183748+00', '718b5ce3-8e16-432c-a222-526e2935faca', 'Yes! It is awesome!');
